@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ictihat": {
+      "type": "http",
+      "url": "https://mcp.imzala.net/mcp"
+    }
+  }
+}

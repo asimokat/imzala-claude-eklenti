@@ -1,0 +1,15 @@
+{
+  "name": "imzala",
+  "owner": {
+    "name": "imzala.net",
+    "url": "https://imzala.net"
+  },
+  "description": "imzala.net'in Claude eklentileri.",
+  "plugins": [
+    {
+      "name": "imzala",
+      "source": "./",
+      "description": "imzala.net içtihat arşivi bağlayıcısı; içtihat araştırması ve dilekçe yazımı skill'leri."
+    }
+  ]
+}
