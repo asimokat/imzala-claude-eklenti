@@ -13,6 +13,7 @@
   "keywords": ["hukuk", "içtihat", "yargıtay", "dilekçe", "türk hukuku", "turkish law", "case law"],
   "icon": "./assets/imzala-ictihat-512.png",
   "documentationUrl": "https://imzala.net/yapay-zeka",
+  "supportUrl": "https://imzala.net/yardim",
   "privacyPolicyUrl": "https://imzala.net/api-gizlilik",
   "termsOfServiceUrl": "https://imzala.net/api-kosullar"
 }
