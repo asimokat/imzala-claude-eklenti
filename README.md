@@ -17,7 +17,7 @@ Bu eklenti imzala.net içtihat arşivini Claude'a bağlar. Arşivde 11,5 milyon 
 
 ### claude.ai ve Claude masaüstü uygulaması
 
-1. **Customize → Plugins → Add → Add marketplace** ekranına `GITHUB_HESABI/imzala-claude-eklenti` yazın.
+1. **Customize → Plugins → Add → Add marketplace** ekranına `asimokat/imzala-claude-eklenti` yazın.
 2. **Discover** listesinde **imzala** eklentisini seçip kurun.
 3. Eklentinin **Connectors** sekmesinde bağlayıcıya bağlanın. Açılan imzala.net sayfasında e-postanızı yazın, gelen 6 haneli kodu girin ve izin verin.
 
@@ -26,7 +26,7 @@ Kurulum tek başına giriş yaptırmaz; her kullanıcı kendi hesabıyla bağlan
 ### Claude Code
 
 ```bash
-claude plugin marketplace add GITHUB_HESABI/imzala-claude-eklenti
+claude plugin marketplace add asimokat/imzala-claude-eklenti
 claude plugin install imzala@imzala
 ```
 

@@ -8,6 +8,7 @@
     "url": "https://imzala.net"
   },
   "homepage": "https://imzala.net/yapay-zeka",
+  "repository": "https://github.com/asimokat/imzala-claude-eklenti",
   "license": "MIT",
   "keywords": ["hukuk", "içtihat", "yargıtay", "dilekçe", "türk hukuku", "turkish law", "case law"],
   "icon": "./assets/imzala-ictihat-512.png",
