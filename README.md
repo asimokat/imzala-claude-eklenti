@@ -11,6 +11,7 @@ Bu eklenti imzala.net içtihat arşivini Claude'a bağlar. Arşivde 11,5 milyon 
 | `ictihat` bağlayıcısı | `https://mcp.imzala.net/mcp` adresine bağlanır. 12 alet sunar, hepsi salt okunurdur. |
 | `ictihat-arastirma` skill'i | Arama yöntemini öğretir: kelime ve anlam araması birlikte, okumadan atıf yok, künye doğrulama. |
 | `dilekce-yazimi` skill'i | Dilekçe biçimini öğretir: gerekçe ile içtihat ayrı paragrafta, birebir alıntı, ek listesi. |
+| `md2udf.py` dönüştürücüsü | `dilekce-yazimi` içinde durur. Markdown dilekçeyi UYAP'ın UDF biçimine çevirir. |
 
 ## Kurulum
 
@@ -33,7 +34,8 @@ Ardından bir oturumda `/mcp` yazın, `plugin:imzala:ictihat` sunucusunu seçin 
 
 ## Ne gönderir, ne saklar
 
-- Eklenti yalnız `https://mcp.imzala.net/mcp` adresine bağlanır. Bilgisayarınızda program, komut ya da kanca çalıştırmaz.
+- Eklenti yalnız `https://mcp.imzala.net/mcp` adresine bağlanır. Kanca ve yerel sunucu içermez.
+- Eklentideki tek program `md2udf.py` dönüştürücüsüdür. Python'un kendi kütüphaneleriyle çalışır, ağa bağlanmaz ve yalnız Claude bir dilekçeyi UDF'ye çevirirken çalışır: Claude Code ve Cowork'te bilgisayarınızda, sohbette Claude'un kod çalıştırma ortamında.
 - Aletlerin hepsi salt okunurdur; arşive veri yazmaz.
 - Kimlik e-posta doğrulamasıyla (kod) yapılır, şifre yoktur.
 - Arama aletlerinin sorgu metni sunucuda kaydedilmez. Günlükte yalnız hesap kimliği, alet adı, istemci yazılımının adı, süre, cevap boyutu, hata durumu ve kota sayaçları tutulur (90 gün).
@@ -46,7 +48,7 @@ Hizmet ücretlidir. Her yeni hesap 14 günlük denemeyle başlar. Planlar: [imza
 
 ## English summary
 
-This plugin connects Claude to the imzala.net Turkish case-law archive: 11.5 million court and agency decisions, doctrine citations, the Official Gazette full text, a statute-article map and central-bank and statistics data. It uses a read-only remote MCP server at `https://mcp.imzala.net/mcp` and adds two skills: a research method (keyword plus semantic search, read before citing, verify every citation) and a writing style for Turkish legal petitions. Sign-in is by e-mail code. The service is paid and starts with a 14-day trial. The content is in Turkish.
+This plugin connects Claude to the imzala.net Turkish case-law archive: 11.5 million court and agency decisions, doctrine citations, the Official Gazette full text, a statute-article map and central-bank and statistics data. It uses a read-only remote MCP server at `https://mcp.imzala.net/mcp` and adds two skills: a research method (keyword plus semantic search, read before citing, verify every citation) and a writing style for Turkish legal petitions. The petition skill bundles `md2udf.py`, a Python script that uses only the standard library, makes no network calls and converts Markdown into the UDF format of UYAP, the Turkish court system. Sign-in is by e-mail code. The service is paid and starts with a 14-day trial. The content is in Turkish.
 
 ## Lisans
 

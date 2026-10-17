@@ -42,9 +42,18 @@ Bu biçimde numaralar ve daireler cümlenin içinden art arda geçer, anlatım o
 - Her paragraf tek fikir anlatır.
 - "Yani", "kaldı ki", "takvim şudur" gibi konuşma dili ve doldurma bağlaçlar kullanılmaz.
 
-## Biçim
+## Biçim ve UDF teslimi
 
-- Kullanıcı başka biçim istemedikçe metni Markdown ile yaz: `**kalın**`, `*italik*`, `> ` alıntı bloğu.
+- Metni Markdown ile yaz: `### ` başlık, `**kalın**`, `*italik*`, `> ` alıntı bloğu, `- ` madde.
+- UYAP'a verilecek metin UDF biçiminde teslim edilir. Kullanıcı UDF isterse ya da metin UYAP'a gidecekse Markdown dosyasını bu skill'in klasöründeki dönüştürücüyle çevir (`<skill klasörü>`, bu SKILL.md dosyasının bulunduğu klasördür):
+
+  ```bash
+  python "<skill klasörü>/scripts/md2udf.py" dilekce.md dilekce.udf
+  ```
+
+- Dönüştürücü art arda gelen satırları tek paragrafta birleştirir. DAVACI, VEKİLİ, KONU gibi ayrı satırda kalması gereken her satırın arasına boş satır koy.
+- Dönüştürücü yalnız Python'un kendi kütüphanelerini kullanır ve ağa bağlanmaz. Çıktı Times New Roman 12 punto, iki yana yaslıdır. Başlıklar kalın yazılır, alıntı blokları ve maddeler girintili olur. Başarılı çalışınca paragraf ve karakter sayısını yazar; bu satırı kullanıcıya ilet.
+- Python yoksa ya da dönüştürücü çalışmazsa bunu kullanıcıya söyle ve metni Markdown olarak teslim et.
 - e-imzalı gelen UDF belgeler (arabuluculuk tutanağı, tensip zaptı) PDF'e çevrilmez, orijinal hâliyle ek yapılır.
 
 ## Ekler
