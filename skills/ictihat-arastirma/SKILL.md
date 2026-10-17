@@ -41,6 +41,7 @@ Aşağıdaki aletler görünmüyorsa kullanıcıdan imzala bağlayıcısını ba
 
 ## Dikkat edilecekler
 
+- **Aletleri sırayla çağır.** Sunucu bir hesaptan aynı anda tek çağrı kabul eder; iki alet birlikte çağrılırsa biri "Aynı anda en çok 1 çağrı" hatasıyla döner. Dakikalık istek tavanı dolarsa doğrulanamayan künyeleri kullanıcıya açıkça söyle.
 - **Teklif kanun değildir.** `hukuk_gundemi` ile gelen kanun teklifi yasalaşmamıştır ve dilekçeye dayanak yapılmaz. Anılacaksa durumuyla birlikte yazılır: KOMİSYONDA, GÜNDEMDE ya da KANUNLAŞTI.
 - **Sayıyı hafızadan yazma.** Faiz oranı, endeks ve kur `veri_getir` ile alınır ve kaynağı yazılır. Endekste hangi ölçütün kullanıldığı açıkça belirtilir.
 - **Doktrinde telif vardır.** Kararlar FSEK m.31 gereği serbesttir; tez ve makaleler değildir. Doktrini künye vererek özetle, gövdesini kopyalama.
