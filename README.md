@@ -2,6 +2,8 @@
 
 ![imzala içtihat](assets/imzala-ictihat-512.png)
 
+**GÜNLÜK GÜNCELLENİR, HEP TAZE:** yeni kararlar ve Resmî Gazete her gün arşive eklenir.
+
 Bu eklenti imzala.net içtihat arşivini Claude'a bağlar. Arşivde 11,5 milyon Türk yargı ve kurul kararı, doktrin künyeleri, Resmî Gazete tam metni, kanun maddesi haritası ve TCMB/TÜİK verisi bulunur. Claude cevabı kendisi yazar; kararın metnini, künyesini ve resmî kaynak bağlantısını arşivden alır.
 
 ## Eklentide ne var
@@ -48,7 +50,7 @@ Hizmet ücretlidir. Her yeni hesap 14 günlük denemeyle başlar. Planlar: [imza
 
 ## English summary
 
-This plugin connects Claude to the imzala.net Turkish case-law archive: 11.5 million court and agency decisions, doctrine citations, the Official Gazette full text, a statute-article map and central-bank and statistics data. It uses a read-only remote MCP server at `https://mcp.imzala.net/mcp` and adds two skills: a research method (keyword plus semantic search, read before citing, verify every citation) and a writing style for Turkish legal petitions. The petition skill bundles `md2udf.py`, a Python script that uses only the standard library, makes no network calls and converts Markdown into the UDF format of UYAP, the Turkish court system. Sign-in is by e-mail code. The service is paid and starts with a 14-day trial. The content is in Turkish.
+This plugin connects Claude to the imzala.net Turkish case-law archive, updated daily: 11.5 million court and agency decisions, doctrine citations, the Official Gazette full text, a statute-article map and central-bank and statistics data. It uses a read-only remote MCP server at `https://mcp.imzala.net/mcp` and adds two skills: a research method (keyword plus semantic search, read before citing, verify every citation) and a writing style for Turkish legal petitions. The petition skill bundles `md2udf.py`, a Python script that uses only the standard library, makes no network calls and converts Markdown into the UDF format of UYAP, the Turkish court system. Sign-in is by e-mail code. The service is paid and starts with a 14-day trial. The content is in Turkish.
 
 ## Lisans
 
