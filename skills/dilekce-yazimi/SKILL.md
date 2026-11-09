@@ -45,16 +45,37 @@ Bu biçimde numaralar ve daireler cümlenin içinden art arda geçer, anlatım o
 ## Biçim ve UDF teslimi
 
 - Metni Markdown ile yaz: `### ` başlık, `**kalın**`, `*italik*`, `> ` alıntı bloğu, `- ` madde.
-- UYAP'a verilecek metin UDF biçiminde teslim edilir. Kullanıcı UDF isterse ya da metin UYAP'a gidecekse Markdown dosyasını bu skill'in klasöründeki dönüştürücüyle çevir (`<skill klasörü>`, bu SKILL.md dosyasının bulunduğu klasördür):
-
-  ```bash
-  python "<skill klasörü>/scripts/md2udf.py" dilekce.md dilekce.udf
-  ```
-
-- Dönüştürücü art arda gelen satırları tek paragrafta birleştirir. DAVACI, VEKİLİ, KONU gibi ayrı satırda kalması gereken her satırın arasına boş satır koy.
-- Dönüştürücü yalnız Python'un kendi kütüphanelerini kullanır ve ağa bağlanmaz. Çıktı Times New Roman 12 punto, iki yana yaslıdır. Başlıklar kalın yazılır, alıntı blokları ve maddeler girintili olur. Başarılı çalışınca paragraf ve karakter sayısını yazar; bu satırı kullanıcıya ilet.
-- Python yoksa ya da dönüştürücü çalışmazsa bunu kullanıcıya söyle ve metni Markdown olarak teslim et.
+- UYAP'a verilecek metin UDF biçiminde teslim edilir. Eklenti hazır program içermez. Kod çalıştırabildiğin ortamda (Claude Code, Cowork, sohbetteki kod ortamı) dönüştürücüyü aşağıdaki tarife göre kendin yaz: yalnız Python'un kendi kütüphanelerini (`re`, `zipfile`) kullan, ağa bağlanma, betiği kullanıcının çalışma klasörüne kaydet ve ne yaptığını söyle. Kod çalıştıramıyorsan bunu kullanıcıya söyle ve metni Markdown olarak teslim et.
+- Art arda gelen satırlar tek paragraf sayılır. DAVACI, VEKİLİ, KONU gibi ayrı satırda kalması gereken her satırın arasına boş satır koy.
+- Dönüştürme bitince paragraf ve karakter sayısını kullanıcıya bildir.
 - e-imzalı gelen UDF belgeler (arabuluculuk tutanağı, tensip zaptı) PDF'e çevrilmez, orijinal hâliyle ek yapılır.
+
+### UDF biçimi tarifi
+
+UDF, içinde tek bir `content.xml` bulunan ZIP dosyasıdır (uzantı `.udf`, sıkıştırma deflate). Dosyanın iskeleti:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<template format_id="1.8" >
+<content><![CDATA[Örnek paragraf.
+]]></content>
+<properties><pageFormat mediaSizeName="1" leftMargin="70.0" rightMargin="50.0" topMargin="60.0" bottomMargin="50.0" paperOrientation="1" headerFOffset="20.0" footerFOffset="20.0" /></properties>
+<elements resolver="hvl-default" >
+<paragraph Alignment="3" LineSpacing="0.0" SpaceAbove="2.0" SpaceBelow="4.0" RightIndent="0.0" LeftIndent="0.0"><content family="Times New Roman" size="12" startOffset="0" length="16" /></paragraph>
+</elements>
+<styles><style name="default" family="Dialog" size="12" description="Geçerli" /><style name="hvl-default" family="Times New Roman" size="12" description="Gövde" /></styles>
+</template>
+```
+
+Kurallar:
+
+- Bütün metin tek CDATA içinde durur. Her paragraf, Markdown işaretleri çıkarılmış hâliyle ve sonuna bir satır sonu (`\n`) eklenerek metne yazılır. Metinde `]]>` geçerse `] ]>` yapılır; `【` ve `】` karakterleri `[` ve `]` olur; tek başına duran `---` satırı atlanır.
+- `<elements>` içinde her paragraf bir `<paragraph>`, paragrafın her biçim parçası bir `<content>` öğesidir. `startOffset` ve `length`, CDATA metnindeki karakter indeksleridir (bayt değil). Paragrafın sondaki satır sonu karakteri son `<content>` öğesinin `length` değerine dahildir; boş paragrafta `length="1"` olan tek `<content>` bulunur.
+- Hizalama: gövde, alıntı ve madde `Alignment="3"` (iki yana yaslı); `#` ve `##` başlık `Alignment="1"` (ortalı); `###` ve `####` başlık `Alignment="0"` (sol). Başlıklar `bold="true"` yazılır, başlık içindeki `*` işaretleri atılır.
+- Girinti: alıntı bloğu `LeftIndent="14.0"`; madde `LeftIndent="10.0"` ve metnin başına `– ` (kısa çizgi ve boşluk) konur. Diğer paragraflarda `LeftIndent="0.0"`.
+- `**kalın**` parçası `bold="true"`, `*italik*` parçası `italic="true"` olan ayrı bir `<content>` öğesi olur; işaretler metne yazılmaz, offsetler işaretsiz metne göre hesaplanır.
+- Her `<content>` öğesinde `family="Times New Roman" size="12"` bulunur; `pageFormat` ve `<styles>` yukarıdaki gibi sabittir.
+- Doğrulama: bir paragrafın `<content>` öğeleri birbirini boşluksuz izlemeli (bir öğenin `startOffset + length` değeri sonrakinin `startOffset` değerine eşit) ve bütün paragrafların toplamı CDATA metninin uzunluğuna eşit olmalı. Bu tutmazsa UYAP biçimi kaydırarak gösterir.
 
 ## Ekler
 

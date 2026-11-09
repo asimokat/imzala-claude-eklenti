@@ -15,7 +15,7 @@ Bu eklenti imzala.net içtihat arşivini Claude'a bağlar. Arşivde 11,5 milyon 
 | `ictihat` bağlayıcısı | `https://mcp.imzala.net/mcp` adresine bağlanır. 12 alet sunar: 11'i salt okunurdur, derin araştırma aleti bir rapor işi başlatır. |
 | `ictihat-arastirma` skill'i | Arama yöntemini öğretir: kelime ve anlam araması birlikte, okumadan atıf yok, künye doğrulama. |
 | `dilekce-yazimi` skill'i | Dilekçe biçimini öğretir: gerekçe ile içtihat ayrı paragrafta, birebir alıntı, ek listesi. |
-| `md2udf.py` dönüştürücüsü | `dilekce-yazimi` içinde durur. Markdown dilekçeyi UYAP'ın UDF biçimine çevirir. |
+| UDF biçimi tarifi | `dilekce-yazimi` içinde durur. UYAP'ın UDF dosya biçimini anlatır; Claude, kod çalıştırabildiği ortamda dönüştürücüyü bu tarife göre kendisi yazar. |
 
 ## Kurulum
 
@@ -39,7 +39,7 @@ Ardından bir oturumda `/mcp` yazın, `plugin:imzala:ictihat` sunucusunu seçin 
 ## Ne gönderir, ne saklar
 
 - Eklenti yalnız `https://mcp.imzala.net/mcp` adresine bağlanır. Kanca ve yerel sunucu içermez.
-- Eklentideki tek program `md2udf.py` dönüştürücüsüdür. Python'un kendi kütüphaneleriyle çalışır, ağa bağlanmaz ve yalnız Claude bir dilekçeyi UDF'ye çevirirken çalışır: Claude Code ve Cowork'te bilgisayarınızda, sohbette Claude'un kod çalıştırma ortamında.
+- Eklenti program içermez; yalnız Markdown, JSON ve bir resim dosyasından oluşur. UDF dönüştürme için skill'de yalnız biçim tarifi vardır: Claude dönüştürücüyü kod çalıştırabildiği ortamda kendisi yazar (Claude Code ve Cowork'te bilgisayarınızda, sohbette Claude'un kod çalıştırma ortamında), Python'un kendi kütüphaneleriyle ve ağa bağlanmadan.
 - Aletler arşive veri yazmaz. Derin araştırma aleti dışındakiler salt okunurdur; derin araştırma aleti bir rapor işi başlatır ve aylık kotadan düşer.
 - Kimlik e-posta doğrulamasıyla (kod) yapılır, şifre yoktur.
 - Arama aletlerinin sorgu metni sunucuda kaydedilmez. Günlükte yalnız hesap kimliği, alet adı, istemci yazılımının adı, süre, cevap boyutu, hata durumu ve kota sayaçları tutulur (90 gün).
@@ -52,7 +52,7 @@ Hizmet ücretlidir. Her yeni hesap 14 günlük denemeyle başlar. Planlar: [imza
 
 ## English
 
-This plugin connects Claude to the imzala.net Turkish case-law archive, updated daily: 11.5 million court and agency decisions, doctrine citations, the Official Gazette full text, a statute-article map and central-bank and statistics data. It uses the remote MCP server at `https://mcp.imzala.net/mcp` and adds two skills: a research method (keyword plus semantic search, read before citing, verify every citation) and a writing style for Turkish legal petitions. The petition skill bundles `md2udf.py`, a Python script that uses only the standard library, makes no network calls and converts Markdown into the UDF format of UYAP, the Turkish court system. Sign-in is by e-mail code. The service is paid and starts with a 14-day trial. The content is in Turkish. The server also works with MCP clients other than Claude, as described below.
+This plugin connects Claude to the imzala.net Turkish case-law archive, updated daily: 11.5 million court and agency decisions, doctrine citations, the Official Gazette full text, a statute-article map and central-bank and statistics data. It uses the remote MCP server at `https://mcp.imzala.net/mcp` and adds two skills: a research method (keyword plus semantic search, read before citing, verify every citation) and a writing style for Turkish legal petitions. The petition skill also describes the UDF file format of UYAP, the Turkish court system, so that Claude can write a Markdown-to-UDF converter itself where it can run code; the plugin ships no programs, only Markdown, JSON and one image. Sign-in is by e-mail code. The service is paid and starts with a 14-day trial. The content is in Turkish. The server also works with MCP clients other than Claude, as described below.
 
 <!-- Bu bölüm asimokat/imzala-eklenti README'sindeki İngilizce bölümle aynıdır; ikisi birlikte güncellenir. -->
 ### Tools
