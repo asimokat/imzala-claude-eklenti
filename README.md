@@ -126,20 +126,9 @@ For client developers:
 
 1. Open https://mcp.imzala.net/anahtar and sign in with the e-mail code.
 2. Create a key. It starts with `imz_` and is shown only once. When creating a new key you can revoke the old ones.
-3. Send it with every request: `Authorization: Bearer imz_…`
+3. Send it with every request as a Bearer token in the `Authorization` header. Enter the key where the client keeps secrets, such as its token or header field, together with the server URL above.
 
-```json
-{
-  "mcpServers": {
-    "imzala": {
-      "url": "https://mcp.imzala.net/mcp",
-      "headers": { "Authorization": "Bearer ${IMZALA_API_KEY}" }
-    }
-  }
-}
-```
-
-Keep the key in an environment variable or the client's secret store, never in a repository. How `${IMZALA_API_KEY}` is expanded depends on the client.
+Keep the key out of repositories and shared configuration files. Claude doesn't need a key: it signs in with the e-mail code, and this plugin declares the server without any header.
 
 ### Check the connection
 
