@@ -24,9 +24,11 @@ Dilekçe, layiha, mütalaa, ihtarname: hangi hukuki metin olursa olsun bu kurall
 - İçtihat paragrafı yalnız üstündeki gerekçeyi destekler.
 - Alıntı kararın kendi gerekçesi değil de aktardığı önceki bozma ilamıysa bunu künyede belirt ("…kararında aktarıldığı üzere").
 - Bağlam farkı varsa künyede söyle ("arsa payı karşılığı inşaat sözleşmesine ilişkin olmakla birlikte ölçü ortaktır").
-- Aleyhe içtihadı saklama. Ayrı paragrafta göster ve nasıl ayrıştığını yaz.
+- Aleyhe içtihadı saklama. Ayrı paragrafta göster ve nasıl ayrıştığını yaz (kararın sonradan atıf alıp almadığını veya görüş değişikliği olup olmadığını `karar_atiflari` ile kontrol et).
 
-Alıntıyı ve künyeyi kararın kendi metninden al. imzala bağlayıcısı bağlıysa metni `karar_getir` ile oku, künyeyi `kunye_dogrula` ile doğrula; yöntem `ictihat-arastirma` skill'indedir. Okunmamış ya da doğrulanmamış karar metne girmez.
+Alıntıyı ve künyeyi kararın kendi metninden, kanun hükmünü mevzuatın kendi metninden al. imzala bağlayıcısı bağlıysa kararı `karar_getir` ile, kanun maddesini `mevzuat_getir` ile oku; künyeyi `kunye_dogrula` ile doğrula; usul süresini `sure_hesapla`, faiz, harç, gider avansı ve vekâlet ücreti hesabını `hukuk_hesapla` ile yap; yöntem `ictihat-arastirma` skill'indedir. Okunmamış ya da doğrulanmamış karar ve kanun maddesi metne girmez.
+
+**Sohbet ile resmî dilekçe ayrımı:** Kullanıcıya sohbette açıklama yaparken kararın ve mevzuatın resmî kaynak bağlantısını paylaş; ancak mahkemeye, icra dairesine veya kuruma sunulacak **dilekçe, layiha ve ihtarname metninin içine hiçbir internet adresi (`https://...`), `documentId` ya da arşiv/yapay zekâ adı yazma** — yalnız resmî merci adı, karar tarihi ve Esas/Karar numarası yer alır.
 
 ## Yasak biçim
 

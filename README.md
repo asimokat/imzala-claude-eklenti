@@ -4,7 +4,7 @@
 
 **GÜNLÜK GÜNCELLENİR, HEP TAZE:** yeni kararlar ve Resmî Gazete her gün arşive eklenir.
 
-Bu eklenti imzala.net içtihat arşivini Claude'a bağlar. Arşivde 11,5 milyon Türk yargı ve kurul kararı, doktrin künyeleri, Resmî Gazete tam metni, kanun maddesi haritası ve TCMB/TÜİK verisi bulunur. Claude cevabı kendisi yazar; kararın metnini, künyesini ve resmî kaynak bağlantısını arşivden alır.
+Bu eklenti imzala.net içtihat ve mevzuat arşivini Claude'a bağlar. Arşivde 11,6 milyon Türk yargı ve düzenleyici kurul kararı, madde madde yürürlükteki mevzuat, kararlar arası çift yönlü atıf ağı, usul süresi ve tarife/faiz/harç hesaplayıcıları, doktrin künyeleri, Resmî Gazete tam metni, TÜRKPATENT bültenleri, kanun maddesi haritası ve TCMB/TÜİK/GİB verisi bulunur. Claude cevabı kendisi yazar; kararın ve kanun maddesinin metnini, künyesini ve resmî kaynak bağlantısını arşivden alır.
 
 **English:** [tools, connection and sign-in for any MCP client](#english)
 
@@ -12,9 +12,9 @@ Bu eklenti imzala.net içtihat arşivini Claude'a bağlar. Arşivde 11,5 milyon 
 
 | Parça | Ne yapar |
 |---|---|
-| `ictihat` bağlayıcısı | `https://mcp.imzala.net/mcp` adresine bağlanır. 12 alet sunar: 11'i salt okunurdur, derin araştırma aleti bir rapor işi başlatır. |
-| `ictihat-arastirma` skill'i | Arama yöntemini öğretir: kelime ve anlam araması birlikte, okumadan atıf yok, künye doğrulama. |
-| `dilekce-yazimi` skill'i | Dilekçe biçimini öğretir: gerekçe ile içtihat ayrı paragrafta, birebir alıntı, ek listesi. |
+| `ictihat` bağlayıcısı | `https://mcp.imzala.net/mcp` adresine bağlanır. 24 alet sunar: 23'ü salt okunurdur, derin araştırma aleti bir rapor işi başlatır. |
+| `ictihat-arastirma` skill'i | Arama yöntemini öğretir: kelime ve anlam araması birlikte, karar ve kanun maddesi okunmadan atıf yok, künye doğrulama, çift yönlü atıf ağı ve deterministik süre/tarife hesabı. |
+| `dilekce-yazimi` skill'i | Dilekçe biçimini öğretir: gerekçe ile içtihat ayrı paragrafta, birebir alıntı, ek listesi, sohbet bağlantısı ile resmî dilekçe ayrımı. |
 | UDF biçimi tarifi | `dilekce-yazimi` içinde durur. UYAP'ın UDF dosya biçimini anlatır; Claude, kod çalıştırabildiği ortamda dönüştürücüyü bu tarife göre kendisi yazar. |
 
 ## Kurulum
@@ -40,9 +40,9 @@ Ardından bir oturumda `/mcp` yazın, `plugin:imzala:ictihat` sunucusunu seçin 
 
 - Eklenti yalnız `https://mcp.imzala.net/mcp` adresine bağlanır. Kanca ve yerel sunucu içermez.
 - Eklenti program içermez; yalnız Markdown, JSON ve bir resim dosyasından oluşur. UDF dönüştürme için skill'de yalnız biçim tarifi vardır: Claude dönüştürücüyü kod çalıştırabildiği ortamda kendisi yazar (Claude Code ve Cowork'te bilgisayarınızda, sohbette Claude'un kod çalıştırma ortamında), Python'un kendi kütüphaneleriyle ve ağa bağlanmadan.
-- Aletler arşive veri yazmaz. Derin araştırma aleti dışındakiler salt okunurdur; derin araştırma aleti bir rapor işi başlatır ve aylık kotadan düşer.
+- Aletler arşive veri yazmaz. Derin araştırma aleti dışındaki 23 alet salt okunurdur; derin araştırma aleti bir rapor işi başlatır ve aylık kotadan düşer.
 - Kimlik e-posta doğrulamasıyla (kod) yapılır, şifre yoktur.
-- Arama aletlerinin sorgu metni sunucuda kaydedilmez. Günlükte yalnız hesap kimliği, alet adı, istemci yazılımının adı, süre, cevap boyutu, hata durumu ve kota sayaçları tutulur (90 gün).
+- Arama ve hesaplama aletlerinin sorgu metni sunucuda kaydedilmez. Günlükte yalnız hesap kimliği, alet adı, istemci yazılımının adı, süre, cevap boyutu, hata durumu ve kota sayaçları tutulur (90 gün).
 - Tek istisna derin araştırmadır: sorunun ilk 300 karakteri iş kaydına yazılır ve araştırma Google Gemini ile yürütülür.
 - Ayrıntı: [API gizlilik bildirimi](https://imzala.net/api-gizlilik) · [API kullanım koşulları](https://imzala.net/api-kosullar)
 
@@ -52,25 +52,37 @@ Hizmet ücretlidir. Her yeni hesap 14 günlük denemeyle başlar. Planlar: [imza
 
 ## English
 
-This plugin connects Claude to the imzala.net Turkish case-law archive, updated daily: 11.5 million court and agency decisions, doctrine citations, the Official Gazette full text, a statute-article map and central-bank and statistics data. It uses the remote MCP server at `https://mcp.imzala.net/mcp` and adds two skills: a research method (keyword plus semantic search, read before citing, verify every citation) and a writing style for Turkish legal petitions. The petition skill also describes the UDF file format of UYAP, the Turkish court system, so that Claude can write a Markdown-to-UDF converter itself where it can run code; the plugin ships no programs, only Markdown, JSON and one image. Sign-in is by e-mail code. The service is paid and starts with a 14-day trial. The content is in Turkish. The server also works with MCP clients other than Claude, as described below.
+This plugin connects Claude to the imzala.net Turkish case-law and legislation archive, updated daily: 11.6 million court and regulatory-board decisions, article-level legislation, a bidirectional decision citation graph, deterministic procedural-deadline and legal-fee/interest calculators, doctrine citations, the Official Gazette full text, TÜRKPATENT bulletins, a statute-article map, and central-bank, statistics, and tax data. It uses the remote MCP server at `https://mcp.imzala.net/mcp` and adds two skills: a research method (keyword plus semantic search, read decisions and statute articles before citing, verify every citation, check citation networks, compute deadlines and schedules deterministically) and a writing style for Turkish legal petitions. The petition skill also describes the UDF file format of UYAP, the Turkish court system, so that Claude can write a Markdown-to-UDF converter itself where it can run code; the plugin ships no programs, only Markdown, JSON and one image. Sign-in is by e-mail code. The service is paid and starts with a 14-day trial. The content is in Turkish. The server also works with MCP clients other than Claude, as described below.
 
 <!-- Bu bölüm asimokat/imzala-eklenti README'sindeki İngilizce bölümle aynıdır; ikisi birlikte güncellenir. -->
 ### Tools
 
-The server exposes 12 tools. Eleven are read-only (`readOnlyHint: true`). `arastirma_baslat` is not read-only: each call starts a deep-research job and uses 10 units of the account's monthly quota. It deletes or changes nothing, and no tool writes to the archive. Tool descriptions and parameters are in Turkish.
+The server exposes 24 tools. Twenty-three are read-only (`readOnlyHint: true`). `arastirma_baslat` is not read-only: each call starts a deep-research job and uses 10 units of the account's monthly quota. It deletes or changes nothing, and no tool writes to the archive. Tool descriptions and parameters are in Turkish.
 
 | Tool | What it does | Read-only |
 |---|---|---|
-| `ictihat_ara` | Keyword search across 11.5 million decisions (Court of Cassation, Council of State, Constitutional Court, ECtHR, Court of Accounts, regional and first-instance courts, and boards such as the Competition Authority). Filters by court, year, civil or criminal branch, outcome, document type and the statute article a decision relies on. Each hit has the citation, a document ID, a snippet and the official source link. | yes |
+| `ictihat_ara` | Keyword search across 11.6 million decisions (Court of Cassation, Council of State, Constitutional Court, ECtHR, Court of Accounts, regional and first-instance courts, tax rulings, and regulatory boards). Filters by court, year, civil or criminal branch, outcome, document type and the statute article a decision relies on. Each hit has the citation, a document ID, a snippet and the official source link. | yes |
 | `ictihat_semantik` | Semantic search: takes a plain-language sentence and finds decisions close in meaning even when the words differ (vector index of 28.7 million passages). | yes |
-| `karar_getir` | Returns a decision by document ID: the operative part (default), the passage around a given term, or the full text in pages, headed by the citation and the official source link. | yes |
-| `kunye_dogrula` | Checks whether a citation exists. From the docket and/or decision number it returns the real court, date, outcome and source link, flags a court or date that does not match, and lists near matches when the citation is not found. | yes |
-| `benzer_kararlar` | Lists decisions that rest on the same legal grounds as a given decision. For Constitutional Court decisions it can also list the later decisions that cite it. | yes |
+| `karar_getir` | Returns a decision (or open-access `CC BY` / `CC0` article) by document ID: the operative part (default), the passage around a given term, or the full text in pages, headed by the citation and the official source link. | yes |
+| `kunye_dogrula` | Checks whether a citation exists (zero quota cost). From the docket and/or decision number it returns the real court, date, outcome and source link, flags a court or date that does not match, and lists near matches when the citation is not found. | yes |
+| `mevzuat_ara` | Searches Turkish legislation (statutes, decree-laws, presidential decrees, regulations) by title, law number, or topic, returning full title, enactment and Official Gazette dates, and top matching articles. | yes |
+| `mevzuat_icinde_ara` | Searches inside a specific statute or regulation for terms and lists matching articles with snippets. | yes |
+| `mevzuat_getir` | Retrieves the verbatim text of specific article(s) (including provisional, additional, andbis/repeated articles such as `344`, `Ek 1`, `Geçici 2`, or comma-separated `343,344,345`), table of contents, or paged text of a statute or regulation. | yes |
+| `sure_hesapla` | Deterministic procedural deadline calculator under HMK, CMK, İYUK, İİK, and VUK/6183, accounting for electronic service (`UETS +5 days`), judicial recess (`adli tatil`), financial recess (`mali tatil`), weekends, official holidays, and 2024–2035 religious holidays. | yes |
+| `hukuk_hesapla` | Deterministic legal calculator for tiered statutory/commercial/public-receivable interest (`3095`, `6183`, `VUK`), 2026–2027 statutory attorney fee schedule (`AAÜT`), 2026 court/enforcement fees and advance on costs (`HMK gider avansı`), and self-employment receipt (`SMM`) withholding/VAT. | yes |
+| `karar_atiflari` | Bidirectional decision-to-decision citation graph across the Court of Cassation (`Yargıtay`, `HGK`, `İBK`), Council of State (`Danıştay`), Regional Courts of Appeal (`BAM`), and Constitutional Court (`AYM`): lists both later decisions citing a given decision and earlier decisions it cites. | yes |
+| `benzer_kararlar` | Lists decisions that rest on the same legal grounds as a given decision, or later citing decisions (`atifYapanlar`). | yes |
+| `kurum_karari_ara` | Unified search across 21 regulatory boards and public institutions, including `BTK` (Information and Communication Technologies Authority), `HSK` (Council of Judges and Prosecutors), `TBB`, `Ticaret Sicili Gazetesi` (`TTSG`), Competition Authority, Public Procurement Authority (`KİK`), Data Protection Authority (`KVKK`), `BDDK`, `SPK`, Court of Accounts (`Sayıştay`), Ombudsman (`KDK`), `TİHEK`, Advertising Board, Tax Administration rulings (`GİB`), `SGK`, `MASAK`, `KGK`, and `TÜRMOB`. | yes |
+| `aym_ara` | Dedicated Constitutional Court (`Anayasa Mahkemesi`) search with filters for individual application vs. norm review and violation/annulment outcomes. | yes |
+| `aihm_ara` | Dedicated European Court of Human Rights (`ECtHR / AİHM`) search prioritizing official Turkish translations. | yes |
 | `madde_haritasi` | For a statute article (for example `hmk` 107), shows how the decisions relying on it are distributed: which courts, outcome rates and the trend by year. Returns aggregate counts, not individual decisions. | yes |
-| `doktrin_ara` | Searches 98,651 theses and law-journal articles. Returns the title, citation, abstract and link; the full work is not returned because of copyright. | yes |
+| `doktrin_ara` | Searches 98,651 theses and law-journal articles. Returns title, citation, abstract and link for copyrighted works (`FSEK Art. 35`), and enables full-text access via `karar_getir` for verified open-access (`CC BY` / `CC0`) articles. | yes |
 | `resmi_gazete_ara` | Full-text search of the Official Gazette of the Republic of Türkiye from 27 June 2000 onward: more than 110,000 documents, including notices. | yes |
+| `turkpatent_bulten_ara` | Searches the official bulletins of the Turkish Patent and Trademark Office (`TÜRKPATENT`): Trademark, Design, Patent/Utility Model, Geographical Indication, and Public Notification bulletins, returning publication dates, statutory objection deadlines under Industrial Property Code No. 6769 (`SMK`), full-text matches, and official PDF links. | yes |
 | `hukuk_gundemi` | Legislative agenda: bills before the Turkish Parliament with their status, recent amendments published in the Official Gazette and legal-press headlines, each in the source's own words. | yes |
-| `veri_getir` | Official figures used in legal calculations: the central bank's advance and rediscount interest rates, price indices (consumer, producer, construction and services) and exchange rates for 43 currencies, from the Central Bank of the Republic of Türkiye and the Turkish Statistical Institute, with the source named. | yes |
+| `veri_getir` | Official figures used in legal calculations: the central bank's advance and rediscount interest rates, price indices (consumer, producer, construction and services), exchange rates for 43 currencies, tax calendar, VAT rates, public late-payment/deferral rate history, and TÜRKPATENT bulletin deadlines, with the source named. | yes |
+| `hukuk_rehberi` | Zero-quota methodology and formatting guide covering Turkish case-law research, legislation lookup, deadline/fee calculation, petition drafting, and UYAP `.udf` XML specification. | yes |
+| `abonelik_karti` | Returns the signed-in account's plan, remaining quota, and renewal dates (zero quota cost). | yes |
 | `arastirma_baslat` | Starts a deep-research job for a broad legal question and returns a job ID. The report is usually ready in about 4 minutes and ties every claim to a verified citation and a verbatim quote. | **no**: starts a job and uses quota |
 | `arastirma_sonuc` | Returns the report of a deep-research job by its job ID. While the job is still running, it waits up to 40 seconds and then returns the progress. | yes |
 
@@ -128,7 +140,7 @@ For client developers:
 2. Create a key. It starts with `imz_` and is shown only once. When creating a new key you can revoke the old ones.
 3. Send it with every request as a Bearer token in the `Authorization` header. Enter the key where the client keeps secrets, such as its token or header field, together with the server URL above.
 
-Keep the key out of repositories and shared configuration files. Claude doesn't need a key: it signs in with the e-mail code, and this plugin declares the server without any header.
+Keep the key out of repositories and shared configuration files. Clients with OAuth support sign in with the e-mail code and need no key or header.
 
 ### Check the connection
 
