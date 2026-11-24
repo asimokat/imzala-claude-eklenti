@@ -1,7 +1,7 @@
 {
   "name": "imzala",
-  "displayName": "imzala.net",
-  "version": "0.2.0",
+  "displayName": "imzala.net — Türk içtihat arşivi",
+  "version": "0.2.1",
   "description": "GÜNLÜK GÜNCELLENİR, HEP TAZE. imzala.net içtihat ve mevzuat arşivini (11,6 milyon yargı ve kurul kararı, madde madde mevzuat, süre/tarife hesabı ve atıf ağı) Claude'a bağlar; araştırma ve dilekçe yazımı skill'leri içerir.",
   "author": {
     "name": "imzala.net",
