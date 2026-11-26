@@ -92,6 +92,7 @@ The server exposes 24 tools. Twenty-three are read-only (`readOnlyHint: true`). 
 - Transport: Streamable HTTP
 - Authorization: OAuth 2.1 with sign-in by e-mail code, or a personal API key sent as a Bearer token
 - MCP Registry name: `net.imzala/ictihat`
+- Glama connector: [![imzala.net MCP connector](https://glama.ai/mcp/connectors/net.imzala/ictihat/badges/score.svg)](https://glama.ai/mcp/connectors/net.imzala/ictihat)
 
 Clients that support remote servers and OAuth need only the URL; they start the sign-in on first use. The configuration format depends on the client. A common form:
 
